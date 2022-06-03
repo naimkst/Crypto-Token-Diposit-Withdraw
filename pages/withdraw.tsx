@@ -7,13 +7,13 @@ import { ethers } from "ethers";
 import contracts from "../HardHat/artifacts/contracts/MyToken.sol/MyToken.json";
 var crypto = require("crypto");
 
-const injected = new InjectedConnector();
+const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] });
 
 function Withdraw() {
   const [hasMetamask, setHasMetamask] = useState(false);
   const [address, setAddress] = useState("");
   const [sendaddress, setSendaddress] = useState("");
-  const [sendtoken, setSendtoken] = useState("");
+  const [sendtoken, setSendtoken]: any = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [privatekey, setPrivatekey] = useState("");
@@ -31,14 +31,14 @@ function Withdraw() {
   } = useWeb3React();
 
   async function connect() {
-    if (typeof window.ethereum !== "undefined") {
+    // if (typeof window.ethereum !== "undefined") {
       try {
         await activate(injected);
         setHasMetamask(true);
       } catch (e) {
         console.log(e);
       }
-    }
+    // }
   }
 
   async function execute() {
@@ -53,8 +53,8 @@ function Withdraw() {
       );
       try {
         const totalSupply = await contract.totalSupply();
-        const balance = await contract.balanceOf(
-          account.toString()
+        const balance: any = await contract.balanceOf(
+          account?.toString()
         );
         setBalance(ethers.utils.formatEther(balance));
         console.log("Token Balances", ethers.utils.formatEther(balance));
@@ -63,7 +63,7 @@ function Withdraw() {
         const tokenAmount = await ethers.utils.formatEther(tokenPrice);
         console.log("Total Sale", totalSale.toString());
         console.log("Acount Balance", balance.toString());
-        const howManyToken = sendtoken;
+        const howManyToken: any = sendtoken;
         const tokenTotalPrice = howManyToken * tokenPrice;
         const parshValue = ethers.utils.formatUnits(tokenTotalPrice, "gwei");
         const parshToken = ethers.utils.formatUnits(howManyToken, "ether");
@@ -83,7 +83,7 @@ function Withdraw() {
           "Successfully sent " + sendtoken + " tokens to " + toAddress
         );
 
-      } catch (error) {
+      } catch (error: any) {
         setErrorMessage(error.message);
         console.log(error.message);
       }
@@ -94,9 +94,9 @@ function Withdraw() {
 
 
   useEffect(() => {
-    if (typeof window.ethereum !== "undefined") {
+    // if (typeof window.ethereum !== "undefined") {
       setHasMetamask(true);
-    }
+    // }
   });
 
   return (

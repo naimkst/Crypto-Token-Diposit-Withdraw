@@ -12,12 +12,11 @@ var crypto = require("crypto");
 
 // ethers.utils.parseUnits(ethers.utils.formatEther(tokenTotalPrice), "ether"),
 
+const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] });
 
-const injected = new InjectedConnector();
-
-const Home: NextPage = ({ web3 }) => {
+const Home: NextPage = () => {
   const [hasMetamask, setHasMetamask] = useState(false);
-  const [address, setAddress] = useState("");
+  const [address, setAddress]: any= useState("");
   const [sendaddress, setSendaddress] = useState("");
   const [sendtoken, setSendtoken] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -35,14 +34,14 @@ const Home: NextPage = ({ web3 }) => {
   } = useWeb3React();
 
   async function connect() {
-    if (typeof window.ethereum !== "undefined") {
-      try {
-        await activate(injected);
-        setHasMetamask(true);
-      } catch (e) {
-        console.log(e);
-      }
+    // if (typeof window.ethereum !== "undefined") {
+    try {
+      await activate(injected);
+      setHasMetamask(true);
+    } catch (e) {
+      console.log(e);
     }
+    // }
   }
 
   async function execute() {
@@ -57,29 +56,41 @@ const Home: NextPage = ({ web3 }) => {
       );
       try {
         const totalSupply = await contract.totalSupply();
-        const balance = await contract.balances("0x2298304e8e61051dC8AA7C619D6eC0E70137B4cb");
+        const balance = await contract.balances(
+          "0x2298304e8e61051dC8AA7C619D6eC0E70137B4cb"
+        );
         const tokenPrice = await contract.tokenPrice();
         const totalSale = await contract.totalSale();
         const tokenAmount = await ethers.utils.formatEther(tokenPrice);
         console.log("Total Sale", totalSale.toString());
         console.log("Acount Balance", balance.toString());
-        const howManyToken = sendtoken;
-        const tokenTotalPrice = howManyToken*tokenPrice;
+        const howManyToken: any = sendtoken;
+        const tokenTotalPrice = howManyToken * tokenPrice;
         const parshValue = ethers.utils.formatUnits(tokenTotalPrice, "gwei");
         const parshToken = ethers.utils.formatUnits(howManyToken, "ether");
-        console.log("TOken Price", tokenTotalPrice, "parse Valaue", tokenTotalPrice, "How Many Token", parshToken);
+        console.log(
+          "TOken Price",
+          tokenTotalPrice,
+          "parse Valaue",
+          tokenTotalPrice,
+          "How Many Token",
+          parshToken
+        );
 
         // const dai = ethers.utils.parseUnits({ ethers.utils.formatEther(balance) }, "ether")
         // const buytoken = await contract.buyToken(ethers.utils.parseUnits(ethers.utils.formatEther(howManyToken * 10 ** 18), "wei"), {
         //   value: ethers.utils.parseUnits(parshValue, "ether"),
         // });
 
-        const buytoken = await contract.buyToken(ethers.utils.parseUnits(howManyToken), {
-          value: ethers.utils.parseUnits(parshValue, "ether"),
-        });
-        console.log("Ether Payment", buytoken)
+        const buytoken = await contract.buyToken(
+          ethers.utils.parseUnits(howManyToken),
+          {
+            value: ethers.utils.parseUnits(parshValue, "ether"),
+          }
+        );
+        console.log("Ether Payment", buytoken);
         setSuccessMessage(
-            "Successfully purchase " + howManyToken + " tokens to " +  account
+          "Successfully purchase " + howManyToken + " tokens to " + account
         );
         // const transfer = await contract.transfer("0x2298304e8e61051dC8AA7C619D6eC0E70137B4cb", howManyToken.toString());
         // if(buytoken.hash){
@@ -90,12 +101,11 @@ const Home: NextPage = ({ web3 }) => {
 
         // }
         // const transfer = await contract.transfer(sendaddress.toString(), dai);
-              // Send tokens
-      // await contract.transfer("0x2298304e8e61051dC8AA7C619D6eC0E70137B4cb", dai).then((transferResult: any) => {
-      //   console.dir(transferResult)
-      //   alert("sent token")
-      // });
-
+        // Send tokens
+        // await contract.transfer("0x2298304e8e61051dC8AA7C619D6eC0E70137B4cb", dai).then((transferResult: any) => {
+        //   console.dir(transferResult)
+        //   alert("sent token")
+        // });
 
         // console.log("Buy Token", transfer);
         // const dai = (sendtoken * 10 ** 18).toString();
@@ -106,7 +116,7 @@ const Home: NextPage = ({ web3 }) => {
         // );
         // console.log(ethers.utils.formatUnits(balance, 18));
         // setAddress = await contract.address;
-      } catch (error) {
+      } catch (error: any) {
         setErrorMessage(error.message);
         console.log(error.message);
       }
@@ -132,29 +142,22 @@ const Home: NextPage = ({ web3 }) => {
   };
 
   useEffect(() => {
-    if (typeof window.ethereum !== "undefined") {
-      setHasMetamask(true);
-    }
+    // if (typeof window.ethereum !== "undefined") {
+    setHasMetamask(true);
+    // }
   });
 
   return (
-    <div>
-      <>
+    <>
+      <div>
         {/* { JSON.stringify(sendtoken) } */}
-        <div
-          style={{
-            margin: "0 auto",
-            width: "50%",
-            textAlign: "center",
-            marginTop: "5%",
-          }}
-        >
-          <button className="connect" onClick={() => connect()}>
+        <div>
+          <button className="connect connect-btn" onClick={() => connect()}>
             Connect
           </button>
           <br />
           {active ? account : ""}
-          { address ? setAddress(account) : '' }
+          {address ? setAddress(account) : ""}
           <br />
           {/* <input
             className="inputField"
@@ -189,8 +192,8 @@ const Home: NextPage = ({ web3 }) => {
             </div>
           )}
         </div>
-      </>
-    </div>
+      </div>
+    </>
   );
 };
 
