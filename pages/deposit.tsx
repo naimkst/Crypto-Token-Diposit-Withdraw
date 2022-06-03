@@ -114,7 +114,7 @@ function Deposit() {
 
   return (
     <>
-      {JSON.stringify(sendtoken)}
+      {/* {JSON.stringify(sendtoken)} */}
 
       {!account && (
         <div>
