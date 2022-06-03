@@ -1,16 +1,52 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-a {
-  color: inherit;
-  text-decoration: none;
+inputField{
+  padding: 10px 10px;
+  width: 70%;
+  text-align: center;
 }
-
-* {
-  box-sizing: border-box;
+.inputFieldToken{
+  padding: 10px 10px;
+  width: 30%;
+  margin-top: 20px;
+  text-align: center;
+}
+.connect{
+  padding: 10px 20px;
+  border: none;
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+.exicute{
+  padding: 10px 20px;
+  border: none;
+  background-color: #1b351c;
+  color: #fff;
+  border-radius: 3px;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+.error{
+  color: red;
+  font-size: 12px;
+}
+.success{
+  color: green;
+  font-size: 12px;
+}
+.create-address {
+  display: inherit;
+  width: auto;
+  margin: 0 auto;
+  border: 1px dashed;
+  padding: 40px;
+  margin-top: 30px;
+}
+.create-address span{
+  display: inline-block;
+  color: red;
 }
