@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { ethers } from "ethers";
-import contracts from "../HardHat/artifacts/contracts/MyToken.sol/MyToken.json";
+import contracts from "HardHat/artifacts/contracts/MyToken.sol/MyToken.json";
 var crypto = require("crypto");
 
 // creates: 0xA69818A43F06f39Db1A6b36eDAc1e216eFa88355;
