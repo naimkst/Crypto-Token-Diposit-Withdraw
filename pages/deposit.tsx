@@ -6,7 +6,8 @@ import type { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { ethers } from "ethers";
-import contracts from "HardHat/artifacts/contracts/MyToken.sol/MyToken.json";
+// import contracts from "HardHat/artifacts/contracts/MyToken.sol/MyToken.json";
+import contracts from "public/MyToken.json";
 var crypto = require("crypto");
 
 const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] });
