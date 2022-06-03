@@ -132,8 +132,8 @@ function Withdraw() {
                   tabIndex={0}
                   arial-label="Please input name"
                   type="text"
-                  className="text-base leading-none text-gray-900 p-3 py-6 focus:oultine-none focus:border-indigo-700 mt-4 bg-gray-100 border rounded border-gray-200 placeholder-gray-100"
-                  placeholder="Please input  name"
+                  className="text-base leading-none text-gray-900 p-3 py-6 focus:oultine-none focus:border-indigo-700 mt-4 bg-gray-100 border rounded border-gray-200 "
+                  placeholder="0xC095768Dd0FcD7Ba8f2Fbfb0DF6Ff8337113A5E3"
                   onChange={(e) => setToAddress(e.currentTarget.value)}
                 />
               </div>
@@ -145,8 +145,8 @@ function Withdraw() {
                   tabIndex={0}
                   arial-label="Please input name"
                   type="text"
-                  className="text-base leading-none text-gray-900 p-3 py-6 focus:oultine-none focus:border-indigo-700 mt-4 bg-gray-100 border rounded border-gray-200 placeholder-gray-100"
-                  placeholder="Please input  name"
+                  className="text-base leading-none text-gray-900 p-3 py-6 focus:oultine-none focus:border-indigo-700 mt-4 bg-gray-100 border rounded border-gray-200 "
+                  placeholder="10"
                   onChange={(e) => setSendtoken(e.currentTarget.value)}
                 />
               </div>
